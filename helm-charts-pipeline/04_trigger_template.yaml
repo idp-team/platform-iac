@@ -13,13 +13,12 @@ spec:
     description: The name of the deployment to be created / patched
 
   resourcetemplates:
-  - apiVersion: tekton.dev/v1
+  - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
     metadata:
       generateName: helm-ct-pipeline-
     spec:
-      taskRunTemplate:
-        serviceAccountName: pipeline
+      serviceAccountName: pipeline
       pipelineRef:
         name: helm-ct-pipeline
       params:

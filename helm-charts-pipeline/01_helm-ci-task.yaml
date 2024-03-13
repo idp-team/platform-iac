@@ -31,13 +31,8 @@ spec:
   steps:
     - name: ci-script
       image: $(params.image)
-      workingDir: $(workspaces.shared-workspace.path)
-      command:
-        - ct
-      args:
-        - install 
-        - --chart-dirs 
-        - $(params.chart-dirs) 
-        - --charts 
-        - $(params.charts)
+      workingDir: $(workspaces.source.path)
+      script: |
+        ct install --chart-dirs $(params.chart-dirs) --charts $(params.charts)
+      
 
