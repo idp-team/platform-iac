@@ -32,10 +32,18 @@ spec:
       type: string
       description: namespace to run ci tests
       default: "helm-demo"
+    - name: ct-config-file
+      type: string
+      description: config file for running ct commands
+      default: "ct.yaml"
+    - name: skip-cleanup
+      type: string
+      description: Skip cleanup of resources
+      default: "false"
   steps:
     - name: ci-script
       image: $(params.image)
       workingDir: $(workspaces.source.path)
       script: |
-        ct install --chart-dirs $(params.chart-dirs) --charts $(params.charts) --namespace $(params.namespace)
+        ct install --chart-dirs $(params.chart-dirs) --charts $(params.charts) --namespace $(params.namespace) --config $(params.ct-config-file) --skip-clean-up $(params.skip-cleanup)
       
