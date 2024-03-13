@@ -1,0 +1,43 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: helm-ci-task
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/categories: Developer Tools
+    tekton.dev/tags: helm,lint,test
+    tekton.dev/displayName: "Helm CI Lint&Test"
+    tekton.dev/platforms: "linux/amd64"
+spec:
+  description: >-
+    This task can be used to replace fields in YAML files. For example for altering helm charts on GitOps repos.
+  workspaces:
+    - name: source
+      description: A workspace that contains the file which needs to be altered.
+  params:
+    - name: image
+      type: string
+      description: The chart testing image to use.
+      default: quay.io/helmpack/chart-testing:v3.7.1
+    - name: chart-dirs
+      type: string
+      description: directory of the charts
+      default: "charts/"
+    - name: charts
+      type: string
+      description: name of the chart to test
+      default: ""
+  steps:
+    - name: ci-script
+      image: $(params.image)
+      workingDir: $(workspaces.shared-workspace.path)
+      command:
+        - ct
+      args:
+        - install 
+        - --chart-dirs 
+        - $(params.chart-dirs) 
+        - --charts 
+        - $(params.charts)
+

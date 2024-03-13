@@ -1,0 +1,16 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: Trigger
+metadata:
+  name: helm-ct-trigger
+spec:
+  serviceAccountName: pipeline
+  interceptors:
+    - ref:
+        name: "github"
+      params:
+        - name: "eventTypes"
+          value: ["push"]
+  bindings:
+    - ref: helm-ct
+  template:
+    ref: helm-ct
