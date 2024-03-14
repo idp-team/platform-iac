@@ -42,6 +42,6 @@ spec:
       workingDir: $(workspaces.source.path)
       script: |
         ## export kubeconfig file from previous step
-        export KUBECONFIG="$(workspaces.input.path)/kubeconfig"
+        export KUBECONFIG="$(workspaces.source.path)/kubeconfig"
         ct install --chart-dirs $(params.chart-dirs) --charts $(params.charts) --namespace $(params.namespace) --config $(params.ct-config-file)
       
