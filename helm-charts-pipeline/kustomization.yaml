@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: helm-tekton-pipeline
 resources:
   - ./namespace.yaml
+  - ./00_rbac.yaml
   - ./00_sa.yaml
   - ./00_sa_secret.yaml
   - ./01_helm-ci-task.yaml
