@@ -3,6 +3,6 @@ kind: EventListener
 metadata:
   name: helm-ct
 spec:
-  serviceAccountName: pipeline
+  serviceAccountName: helm-pipeline-admin
   triggers:
     - triggerRef: helm-ct-trigger
