@@ -3,7 +3,7 @@ kind: Trigger
 metadata:
   name: helm-ct-trigger
 spec:
-  serviceAccountName: helm-pipeline-admin
+  serviceAccountName: pipeline
   interceptors:
     - ref:
         name: "github"

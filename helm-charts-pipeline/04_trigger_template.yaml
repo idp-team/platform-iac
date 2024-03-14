@@ -18,7 +18,7 @@ spec:
     metadata:
       generateName: helm-ct-pipeline-
     spec:
-      serviceAccountName: helm-pipeline-admin
+      serviceAccountName: pipeline
       pipelineRef:
         name: helm-ct-pipeline
       params:
