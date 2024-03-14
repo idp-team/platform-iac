@@ -1,0 +1,20 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: helm-tekton-pipeline
+  namespace: helm-tekton-pipeline
+  labels:
+    app.kubernetes.io/managed-by: EventListener
+    app.kubernetes.io/part-of: Triggers
+    eventlistener: helm-ct
+spec:
+  to:
+    kind: Service
+    name: el-helm-ct
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+    destinationCACertificate: ''
+  port:
+    targetPort: http-listener
+

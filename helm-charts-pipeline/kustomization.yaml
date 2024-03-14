@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: helm-tekton-pipeline
+resources:
+  - ./namespace.yaml
+  - ./00_sa.yaml
+  - ./00_sa_secret.yaml
+  - ./01_helm-ci-task.yaml
+  - ./01_kubeconfig_creator_task.yaml
+  - ./02_pipeline.yaml
+  - ./03_trigger-bindings.yaml
+  - ./04_trigger_template.yaml
+  - ./05_trigger.yaml
+  - ./06_event_listener.yaml
+  - ./07_route.yaml

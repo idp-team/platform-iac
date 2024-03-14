@@ -33,6 +33,18 @@ spec:
       value: "true"
     - name: revision
       value: $(params.git-revision)
+  - name: kubeconfig-creator
+    params:
+      - name: url
+        value: 'https://api.cluster-h2ndv.sandbox2830.opentlc.com:6443'
+    runAfter:
+      - fetch-repository
+    taskRef:
+      kind: Task
+      name: kubeconfig-creator
+    workspaces:
+      - name: output
+        workspace: shared-workspace
   - name: run-ct-test
     taskRef:
       name: helm-ci-task
@@ -44,4 +56,4 @@ spec:
     - name: source
       workspace: shared-workspace
     runAfter:
-    - fetch-repository
+    - kubeconfig-creator
