@@ -10,3 +10,7 @@ spec:
     value: $(body.repository.name)
   - name: git-revision
     value: $(body.head_commit.id)
+  - name: pr-number
+    value:  $(body.pull_request.number)
+  - name: pr-url
+    value: $(body.pull_request.url)

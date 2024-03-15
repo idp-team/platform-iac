@@ -16,6 +16,9 @@ spec:
     type: string
     description: revision to be used from repo of the code for deployment
     default: master
+  - name: pr-url
+    type: string
+    description: url of the pull request
   tasks:
   - name: fetch-repository
     taskRef:
@@ -57,3 +60,14 @@ spec:
       workspace: shared-workspace
     runAfter:
     - kubeconfig-creator
+  # github-add-comment
+  finally:
+    - name: add-comment-to-pr
+      taskRef:
+        - name: github-add-comment
+          kind: Task
+      params:
+      - name: REQUEST_URL
+        value: $(params.pr-url)
+      - name: COMMENT_OR_FILE
+        value: temporary dummy comment for pull request $(params.pr-number)

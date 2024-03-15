@@ -9,7 +9,7 @@ spec:
         name: "github"
       params:
         - name: "eventTypes"
-          value: ["push"]
+          value: ["pull_requests"]     
   bindings:
     - ref: helm-ct
   template:

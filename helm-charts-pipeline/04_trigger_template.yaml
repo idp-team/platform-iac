@@ -23,7 +23,9 @@ spec:
         name: helm-ct-pipeline
       params:
       - name: pr-number
-        value: 1
+        value: $(tt.params.pr-number)
+      - name: pr-url
+        value: $(tt.params.pr-url)
       - name: git-url
         value: $(tt.params.git-repo-url)
       - name: git-revision
