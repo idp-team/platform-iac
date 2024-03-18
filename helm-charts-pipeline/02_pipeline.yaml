@@ -1,4 +1,4 @@
-apiVersion: triggers.tekton.dev/v1beta1
+apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: helm-ct-pipeline
@@ -64,8 +64,7 @@ spec:
   finally:
     - name: add-comment-to-pr
       taskRef:
-        - name: github-add-comment
-          kind: Task
+        name: github-add-comment
       params:
       - name: REQUEST_URL
         value: $(params.pr-url)
