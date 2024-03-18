@@ -7,6 +7,7 @@ resources:
   - ./00_rbac.yaml
   - ./00_sa.yaml
   - ./00_sa_secret.yaml
+  - ./01_github_add_comment.yaml
   - ./01_helm-ci-task.yaml
   - ./01_kubeconfig_creator_task.yaml
   - ./02_pipeline.yaml
