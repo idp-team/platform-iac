@@ -1,0 +1,9 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./helm-ct-test.yaml
+  - ./helm-package-task.yaml
+  - ./github_add_comment.yaml
+  - ./kubeconfig_creator_task.yaml
+  - ./create-github-release.yaml

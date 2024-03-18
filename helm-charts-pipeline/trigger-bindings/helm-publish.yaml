@@ -1,0 +1,11 @@
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: helm-publish
+spec:
+  params:
+    - name: git-repo-url
+      value: $(body.repository.html_url)
+    - name: git-revision
+      value: $(body.ref)

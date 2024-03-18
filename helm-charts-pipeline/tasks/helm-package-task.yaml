@@ -1,0 +1,38 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: helm-package-task
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/categories: Developer Tools
+    tekton.dev/tags: helm,lint,test
+    tekton.dev/displayName: "Helm CI Lint&Test"
+    tekton.dev/platforms: "linux/amd64"
+spec:
+  description: >-
+    This task can be used to replace fields in YAML files. For example for altering helm charts on GitOps repos.
+  workspaces:
+    - name: source
+      description: A workspace that contains the file which needs to be altered.
+  params:
+    - name: CHARTS_DIR
+      description: The directory in source that contains the helm chart
+      default: "."
+    - name: CHART_NAME
+      description: Name of the chart
+      default: "deploy"
+    - name: HELM_VERSION
+      description: "Specify a specific helm version"
+      default: "latest"
+  results:
+    - name: CHART_PACKAGE
+      description: Digest of the image just built.
+  steps:
+    - name: package
+      image: lachlanevenson/k8s-helm:$(inputs.params.HELM_VERSION)
+      workingDir: /workspace/source
+      script: |
+        helm package $(inputs.params.CHARTS_DIR)/$(inputs.params.CHART_NAME)
+        ls $(inputs.params.CHART_NAME)*.tgz | tee $(results.CHART_PACKAGE.path)

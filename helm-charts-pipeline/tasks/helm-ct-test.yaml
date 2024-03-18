@@ -36,6 +36,10 @@ spec:
       type: string
       description: config file for running ct commands
       default: "ct.yaml"
+    - name: target-branch
+      type: string
+      description: target branch to test ct
+      default: "main"
   steps:
     - name: ci-script
       image: $(params.image)
@@ -43,5 +47,4 @@ spec:
       script: |
         ## export kubeconfig file from previous step
         export KUBECONFIG="$(workspaces.source.path)/kubeconfig"
-        ct lint-and-install --chart-dirs $(params.chart-dirs) --charts $(params.charts) --namespace $(params.namespace) --config $(params.ct-config-file)
-      
+        ct lint-and-install --target-branch $(params.target-branch) --chart-dirs $(params.chart-dirs) --charts $(params.charts) --namespace $(params.namespace) --config $(params.ct-config-file)

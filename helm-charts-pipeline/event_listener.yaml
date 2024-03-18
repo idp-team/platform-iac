@@ -1,0 +1,40 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: helm-ct
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - name: github-pr-listener
+      interceptors:
+        - ref:
+            name: "github"
+          params:
+            - name: "eventTypes"
+              value: ["pull_request"]
+        - name: "only when PRs are opened"
+          ref:
+            name: "cel"
+          params:
+            - name: "filter"
+              value: "body.action in ['opened', 'synchronize', 'reopened']"
+      bindings:
+        - ref: helm-ct-pr
+      template:
+        ref: helm-ct-pr
+    - name: github-main-listener
+      interceptors:
+        - ref:
+            name: "github"
+          params:
+            - name: "eventTypes"
+              value: ["push"]
+        - ref:
+            name: "cel"
+          params:
+            - name: "filter"
+              value: body.ref == 'refs/heads/main'
+      bindings:
+        - ref: helm-publish
+      template:
+        ref: helm-publish
