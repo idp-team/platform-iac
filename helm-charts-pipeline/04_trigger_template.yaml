@@ -11,6 +11,10 @@ spec:
     default: master
   - name: git-repo-name
     description: The name of the deployment to be created / patched
+  - name: pr-number
+    description: the pull request number
+  - name: pr-url
+    description: the pull request url
 
   resourcetemplates:
   - apiVersion: tekton.dev/v1beta1
