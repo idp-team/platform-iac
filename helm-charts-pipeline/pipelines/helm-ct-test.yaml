@@ -27,7 +27,7 @@ spec:
       type: string
       description: The full name of the repository
   tasks:
-    - name: github-set-status
+    - name: set-status-pending
       taskRef:
         name: github-set-status
       params:
@@ -39,6 +39,8 @@ spec:
           value: Change the GitHub PR status to pending
         - name: STATE
           value: "pending"
+        - name: TARGET_URL
+          value: 'https://console-openshift-console.apps.cluster-h2ndv.sandbox2830.opentlc.com/k8s/ns/helm-tekton-pipeline/tekton.dev~v1beta1~PipelineRun/$(context.pipelineRun.name)'
     - name: fetch-repository
       taskRef:
         name: git-clone
@@ -55,6 +57,8 @@ spec:
           value: "true"
         - name: revision
           value: $(params.git-revision)
+      runAfter:
+        - set-status-pending
     - name: kubeconfig-creator
       params:
         - name: url
