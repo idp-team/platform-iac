@@ -77,6 +77,8 @@ spec:
           value: $(params.pr-url)
         - name: COMMENT_OR_FILE
           value: temporary dummy comment for pull request $(params.pr-number)
+        - name: aggregateTasksStatus
+          value: "$(tasks.status)"
     - name: github-set-status
       taskRef:
         name: github-set-status
@@ -85,5 +87,9 @@ spec:
           value: $(params.git-repo-full-name)
         - name: SHA
           value: $(params.head-sha)
+        - name: DESCRIPTION
+          value: An update to GitHub about our pipeline status
+        - name: STATE
+          value: "$(tasks.status)"
         - name: TARGET_URL
           value: 'https://console-openshift-console.apps.cluster-h2ndv.sandbox2830.opentlc.com/k8s/ns/helm-tekton-pipeline/tekton.dev~v1beta1~PipelineRun/$(context.pipelineRun.name)'
