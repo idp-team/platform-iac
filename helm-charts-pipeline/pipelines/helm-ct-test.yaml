@@ -76,9 +76,7 @@ spec:
         - name: REQUEST_URL
           value: $(params.pr-url)
         - name: COMMENT_OR_FILE
-          value: temporary dummy comment for pull request $(params.pr-number)
-        - name: aggregateTasksStatus
-          value: "$(tasks.status)"
+          value: "Pipeline run status for PR#$(params.pr-number) is $(tasks.status)"
     - name: github-set-status
       taskRef:
         name: github-set-status
