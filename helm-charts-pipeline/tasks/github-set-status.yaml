@@ -126,12 +126,12 @@ spec:
         import sys
         import http.client
 
-        if STATE == "Succeeded" || STATE == "Completed":
-            STATE = "success"
-        elif STATE == "Failed":
-            STATE == "failure"
+        if os.getenv("STATE") == "Succeeded" or os.getenv("STATE") == "Completed":
+            os.environ['STATE'] = "success"
+        elif os.getenv("STATE") == "Failed":
+            os.environ['STATE'] = "failure"
         else:
-            STATE == "error"
+            os.environ['STATE'] = "error"
 
         github_token_filename = "/etc/github-set-status/" + \
             os.getenv("GITHUB_TOKEN_SECRET_KEY")
