@@ -130,8 +130,6 @@ spec:
             os.environ['STATE'] = "success"
         elif os.getenv("STATE") == "Failed":
             os.environ['STATE'] = "failure"
-        else:
-            os.environ['STATE'] = "error"
 
         github_token_filename = "/etc/github-set-status/" + \
             os.getenv("GITHUB_TOKEN_SECRET_KEY")

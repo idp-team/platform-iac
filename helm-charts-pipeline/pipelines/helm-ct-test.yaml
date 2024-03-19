@@ -27,6 +27,18 @@ spec:
       type: string
       description: The full name of the repository
   tasks:
+    - name: github-set-status
+      taskRef:
+        name: github-set-status
+      params:
+        - name: REPO_FULL_NAME
+          value: $(params.git-repo-full-name)
+        - name: SHA
+          value: $(params.head-sha)
+        - name: DESCRIPTION
+          value: Change the GitHub PR status to pending
+        - name: STATE
+          value: "pending"
     - name: fetch-repository
       taskRef:
         name: git-clone
