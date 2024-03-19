@@ -16,6 +16,10 @@ spec:
       description: the pull request number
     - name: pr-url
       description: the pull request url
+    - name: head-sha
+      description: git commit SHA
+    - name: git-repo-full-name
+      description: The full name of the repository
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
@@ -34,6 +38,10 @@ spec:
             value: $(tt.params.git-repo-url)
           - name: git-revision
             value: $(tt.params.git-revision)
+          - name: head-sha
+            value: $(tt.params.head-sha)
+          - name: git-repo-full-name
+            value: $(tt.params.git-repo-full-name)
         workspaces:
           - name: shared-workspace
             volumeClaimTemplate:

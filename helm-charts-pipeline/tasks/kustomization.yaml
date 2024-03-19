@@ -5,4 +5,5 @@ resources:
   - ./helm-ct-test.yaml
   - ./helm-package-task.yaml
   - ./github_add_comment.yaml
+  - ./github-set-status.yaml
   - ./kubeconfig_creator_task.yaml

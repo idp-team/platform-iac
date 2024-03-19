@@ -15,3 +15,7 @@ spec:
       value: $(body.pull_request.number)
     - name: pr-url
       value: $(body.pull_request.html_url)
+    - name: head-sha
+      value: $(body.pull_request.head.sha)
+    - name: git-repo-full-name
+      value: $(body.pull_request.head.repo.full_name)

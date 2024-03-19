@@ -20,6 +20,12 @@ spec:
     - name: pr-url
       type: string
       description: url of the pull request
+    - name: head-sha
+      type: string
+      description: git commit SHA
+    - name: git-repo-full-name
+      type: string
+      description: The full name of the repository
   tasks:
     - name: fetch-repository
       taskRef:
@@ -71,3 +77,13 @@ spec:
           value: $(params.pr-url)
         - name: COMMENT_OR_FILE
           value: temporary dummy comment for pull request $(params.pr-number)
+    - name: github-set-status
+      taskRef:
+        name: github-set-status
+      params:
+        - name: REPO_FULL_NAME
+          value: $(params.git-repo-full-name)
+        - name: SHA
+          value: $(params.head-sha)
+        - name: TARGET_URL
+          value: 'https://console-openshift-console.apps.cluster-h2ndv.sandbox2830.opentlc.com/k8s/ns/helm-tekton-pipeline/tekton.dev~v1beta1~PipelineRun/$(context.pipelineRun.name)'
