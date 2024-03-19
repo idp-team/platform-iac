@@ -6,4 +6,3 @@ resources:
   - ./helm-package-task.yaml
   - ./github_add_comment.yaml
   - ./kubeconfig_creator_task.yaml
-  - ./create-github-release.yaml

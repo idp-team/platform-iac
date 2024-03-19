@@ -43,15 +43,13 @@ spec:
       workspaces:
         - name: source
           workspace: shared-workspace
-    # - name: create-github-release
+    # - name: publish-to-artifactory
     #   taskRef:
-    #     name: create-github-release
+    #     name: publish-to-artifactory
     #     kind: Task
     #   params:
     #     - name: RELEASE_FILE_NAME
     #       value: $(tasks.helm-package.results.CHART_PACKAGE)
-    #     - name: TAG
-    #       value: "0.0.1"
     #   workspaces:
     #     - name: source
     #       workspace: shared-workspace
