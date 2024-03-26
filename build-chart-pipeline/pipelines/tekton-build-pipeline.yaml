@@ -1,0 +1,7 @@
+# tasks that we will use for the build process pipeline:
+# git-clone --> fetch repo @ clustertask
+# kubeconfig --> access to other clusters @ task, needs to be defined --> unsure if it's needed
+# maven --> package @ clustertask --> unsure if it's needed
+# kaniko --> build @ task, needs to be defined
+# test --> will be a task, unsure what it will consist of right now
+# publish --> push to artifactory
